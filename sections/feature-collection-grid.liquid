@@ -1,0 +1,325 @@
+<style>
+  #collection-list-grid .left-collection-top ul, 
+  #collection-list-grid .right-collection-top ul, 
+  #collection-list-grid .right-collection-btm ul {margin: 0;}
+  #collection-list-grid li {position: relative;list-style-type: none;margin: 0;}
+  #collection-list-grid a {display: block;}
+  #collection-list-grid img {width: 100%;display: block;}
+  #collection-list-grid .title-coll {display: none;}
+  #collection-list-grid .title-coll {position: absolute;top: 50%;width: 100%;margin-top: -20px;margin-left: -10px;text-align: center;}
+  #collection-list-grid .title-coll h3 {font-family: 'Gotham-Bold';letter-spacing: normal;font-weight: bold;font-size: 16px;}
+  #collection-list-grid .collection-item:hover .title-coll {display: block;}
+  #collection-list-grid li:hover img {opacity: 0.3;}
+  #collection-list-grid .collection-grid .grid__item {
+    position: relative;
+    margin-bottom: 15px;
+  }
+  .m-0 {margin: 0!important}
+</style>
+<div id="collection-list-grid">
+  <div class="wrapper">
+    {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2 class="h1 section-header__title">{{ section.settings.title | escape }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="collection-grid">
+      <div class="grid">
+        <div class="grid__item collection-item large--one-half left-top-collection">
+          <a href="{{section.settings.url_1}}">
+            <img src="{{section.settings.img_1 | img_url: 'master'}}" alt=""/>
+          </a>
+          <div class="title-coll">
+            <h3>
+              {{section.settings.title_1}}
+            </h3>
+          </div>
+        </div>
+        <div class="grid__item collection-item large--one-half right-top-collection">
+          <a href="{{section.settings.url_2}}">
+            <img src="{{section.settings.img_2 | img_url: 'master'}}" alt=""/>
+          </a>
+          <div class="title-coll">
+            <h3>
+              {{section.settings.title_2}}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="grid" style="margin-left: -15px;">
+        <div class="grid__item medium--two-thirds large--two-thirds left-collection m-0">
+          <div class="grid">
+            <div class="grid__item collection-item large--one-half">
+              <a href="{{section.settings.url_3}}">
+                <img src="{{section.settings.img_3 | img_url: 'master'}}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title_3}}
+                </h3>
+              </div>
+            </div>
+            <div class="grid__item collection-item large--one-half">
+              <a href="{{section.settings.url_4}}">
+                <img src="{{section.settings.img_4 | img_url: 'master'}}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title_4}}
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid__item medium--one-third large--one-third left-collection m-0">
+          <div class="grid" style="margin-left: -15px;">
+            <div class="grid__item collection-item">
+              <a href="{{section.settings.url_5}}">
+                <img src="{{section.settings.img_5 | img_url: 'master'}}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title_5}}
+                </h3>
+              </div>
+            </div>
+            <div class="grid__item collection-item">
+              <a href="{{section.settings.url_6}}">
+                <img src="{{section.settings.img_6 | img_url: 'master'}}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title_6}}
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="grid__item collection-item large--one-third left-collection">
+          <a href="{{section.settings.url_7}}">
+            <img src="{{section.settings.img_7 | img_url: 'master'}}" alt=""/>
+          </a>
+          <div class="title-coll">
+            <h3>
+              {{section.settings.title_7}}
+            </h3>
+          </div>
+        </div>
+        <div class="grid__item collection-item large--one-third left-collection">
+          <a href="{{section.settings.url_8}}">
+            <img src="{{section.settings.img_8 | img_url: 'master'}}" alt=""/>
+          </a>
+          <div class="title-coll">
+            <h3>
+              {{section.settings.title_8}}
+            </h3>
+          </div>
+        </div>
+        <div class="grid__item collection-item large--one-third left-collection">
+          <a href="{{section.settings.url_9}}">
+            <img src="{{section.settings.img_9 | img_url: 'master'}}" alt=""/>
+          </a>
+          <div class="title-coll">
+            <h3>
+              {{section.settings.title_9}}
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Featured Collection Grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Image #1"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_1",
+        "label": "Image 1",
+        "info": "560x200"
+	  },
+	  {
+        "type": "text",
+        "id": "title_1",
+        "label": "Title 1"
+      },
+	  {
+        "type": "url",
+        "id": "url_1",
+        "label": "Link 1"
+      },
+      {
+        "type": "header",
+        "content": "Image #2"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_2",
+        "label": "Image 2",
+        "info": "560x200"
+	  },
+	  {
+        "type": "text",
+        "id": "title_2",
+        "label": "Title 2"
+      },
+	  {
+        "type": "url",
+        "id": "url_2",
+        "label": "Link 2"
+      },
+      {
+        "type": "header",
+        "content": "Image #3"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_3",
+        "label": "Image 3",
+        "info": "367x334"
+	  },
+	  {
+        "type": "text",
+        "id": "title_3",
+        "label": "Title 3"
+      },
+	  {
+        "type": "url",
+        "id": "url_3",
+        "label": "Link 3"
+      },
+      {
+        "type": "header",
+        "content": "Image #4"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_4",
+        "label": "Image 4",
+        "info": "367x334"
+	  },
+	  {
+        "type": "text",
+        "id": "title_4",
+        "label": "Title 4"
+      },
+	  {
+        "type": "url",
+        "id": "url_4",
+        "label": "Link 4"
+      },
+      {
+        "type": "header",
+        "content": "Image #5"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_5",
+        "label": "Image 5",
+        "info": "370x155"
+	  },
+	  {
+        "type": "text",
+        "id": "title_5",
+        "label": "Title 5"
+      },
+	  {
+        "type": "url",
+        "id": "url_5",
+        "label": "Link 5"
+      },
+      {
+        "type": "header",
+        "content": "Image #6"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_6",
+        "label": "Image 6",
+        "info": "370x155"
+	  },
+	  {
+        "type": "text",
+        "id": "title_6",
+        "label": "Title 6"
+      },
+	  {
+        "type": "url",
+        "id": "url_6",
+        "label": "Link 6"
+      },
+      {
+        "type": "header",
+        "content": "Image #7"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_7",
+        "label": "Image 7",
+        "info": "368x267"
+	  },
+	  {
+        "type": "text",
+        "id": "title_7",
+        "label": "Title 7"
+      },
+	  {
+        "type": "url",
+        "id": "url_7",
+        "label": "Link 7"
+      },
+      {
+        "type": "header",
+        "content": "Image #8"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_8",
+        "label": "Image 8",
+        "info": "368x267"
+	  },
+	  {
+        "type": "text",
+        "id": "title_8",
+        "label": "Title 8"
+      },
+	  {
+        "type": "url",
+        "id": "url_8",
+        "label": "Link 8"
+      },
+      {
+        "type": "header",
+        "content": "Image #9"
+      },
+      {
+        "type": "image_picker",
+        "id": "img_9",
+        "label": "Image 9",
+        "info": "368x267"
+	  },
+	  {
+        "type": "text",
+        "id": "title_9",
+        "label": "Title 9"
+      },
+	  {
+        "type": "url",
+        "id": "url_9",
+        "label": "Link 9"
+      }
+    ],
+    "presets": [{
+      "name": "Featured Collection Grid",
+      "category": "Collection"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,90 @@
+<style>
+  .logo-insta {width: 100%;display: block;text-align: center;text-transform: uppercase;margin-bottom: 15px;}
+  .logo-insta img {width: 25px;vertical-align: middle;margin: 0 5px;}
+  #instafeed {margin: 0;}
+  #instafeed li {float: left;width: 20%;height: 228px;margin: 0;list-style-type: none;}
+  #instafeed li a, #instafeed li img {display: block;width: 100%;}
+  @media (max-width: 991px){
+    #instafeed li {width: 25%;}
+  }
+  @media (max-width: 480px){
+    #instafeed li {width: 33.333%;}
+  }
+</style>
+<div id="section-insta">
+  <div class="wrapper">
+    <div id="insta-feed"></div>
+  </div>
+</div>
+
+{% comment %}
+<div id="section-insta">
+  <div class="wrapper">
+    <a href="https://www.instagram.com/kamiidea" class="logo-insta">
+      Folow us
+      <img src="{{'instagram-icon.png' | asset_url}}">
+      kamiidea
+    </a>
+    <div class="">
+      <div class="swiper-instafeed swiper-container">
+        <ul id="instafeed" class="footer-img swiper-wrapper"></ul>
+        <!-- Add Arrows -->
+        <div class="carousel-button-next">
+          <svg class="icon icon-chevron-right" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12">
+            <circle cx="40%" cy="50%" r="12" fill="white" />
+            <path d="M0.646446609,1.35355339 C0.451184464,1.15829124 0.451184464,0.841708755 0.646446609,0.646446609 C0.841708755,0.451184464 1.15829124,0.451184464 1.35355339,0.646446609 L6.35355339,5.64644661 C6.54881554,5.84170876 6.54881554,6.15829124 6.35355339,6.35355339 L1.35355339,11.3535534 C1.15829124,11.5488155 0.841708755,11.5488155 0.646446609,11.3535534 C0.451184464,11.1582912 0.451184464,10.8417088 0.646446609,10.6464466 L5.29289322,6 L0.646446609,1.35355339 Z"/>
+          </svg>
+
+        </div>
+        <div class="carousel-button-prev">
+          <svg class="icon icon-chevron-left" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12">
+            <circle cx="60%" cy="50%" r="12" fill="white" />
+            <path d="M6.35355339,10.6464466 C6.54881554,10.8417088 6.54881554,11.1582912 6.35355339,11.3535534 C6.15829124,11.5488155 5.84170876,11.5488155 5.64644661,11.3535534 L0.646446609,6.35355339 C0.451184464,6.15829124 0.451184464,5.84170876 0.646446609,5.64644661 L5.64644661,0.646446609 C5.84170876,0.451184464 6.15829124,0.451184464 6.35355339,0.646446609 C6.54881554,0.841708755 6.54881554,1.15829124 6.35355339,1.35355339 L1.70710678,6 L6.35355339,10.6464466 Z"/>
+          </svg>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ 'instafeed.min.js' | asset_url | script_tag }} 
+<script>
+  var feed = new Instafeed({
+    get: 'user',
+    userId: 202599408,
+    links: 'true',
+    limit: 10,
+    resolution: 'low_resolution',
+    accessToken: '202599408.1677ed0.a2ffe76a59134d4ebec9de47bed4deb3',
+    {% raw %}template: "<li class='image-instagram swiper-slide'><a href='{{link}}'><img src='{{image}}' /></a></li>"{% endraw %}
+  });
+  feed.run();
+  var swiper = new Swiper('.swiper-instafeed', {
+    slidesPerView: 5,
+    loop: true,
+    navigation: {
+      nextEl: '.carousel-button-next',
+      prevEl: '.carousel-button-prev'
+    },
+  });
+</script>
+{% endcomment %}
+{% schema %}
+  {
+    "name": "Instagram Feed",
+    "class": "index-instagram-section",
+    "settings": [
+    ],
+    "presets": [{
+      "name": "Instagram Feed",
+      "category": "Image"
+    }],
+    "blocks" : []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,43 @@
+<div id="instafeed" data-section-id="{{ section.id }}" data-section-type="covet-pics-feed">
+  <div class="wrapperx">
+    {%- assign sectionHeading = section.settings.title -%}
+    {%- assign gallery_code = section.settings.gallery-code -%}
+    <section class="home-section content-area {% if sectionHeading != blank %}has-heading{% endif %}">
+      {% if sectionHeading != blank %}
+      <h2 class="h1 section-header__title" style="text-align:center">{% if section.settings.link != blank %}<a href="{{section.settings.link}}">{% endif %}{{ sectionHeading }}{% if section.settings.link != blank %}</a>{% endif %}</h2>
+      {% endif %}
+      <div class="covet-pics-wrap">
+        {{ gallery_code }}
+      </div>
+    </section>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Covet.pics Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Instagram feed"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "gallery-code",
+      "label": "Gallery Embed Code"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Covet.pics gallery"
+    }
+  ]
+}
+{% endschema %}

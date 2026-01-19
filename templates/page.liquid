@@ -1,0 +1,58 @@
+<!-- /templates/page.liquid -->
+<style>
+  @media (max-width: 480px){
+    .rte table {display: block;overflow-x: auto;}
+  }
+</style>
+<div class="grid">
+  <div class="grid__item">
+
+    {% unless page.handle == 'about' %}
+    <header class="section-header text-center">
+      <h1>{{ page.title }}</h1>
+    </header>
+    {% endunless %}
+
+    <div class="grid">
+      {% if page.handle == 'about' %}
+      <style>
+        .sidepage {display: none;}
+        @media (min-width: 769px){
+          .sidepage {display: block;margin: 0;padding-top: 140px;}
+          .sidepage li {list-style-type: none;margin-bottom: 15px;}
+          .sidepage li a {text-transform: uppercase;}
+        }
+      </style>
+      {% assign h = page.handle %}
+      <div class="grid__item large--one-sixth">
+        <ul class="sidepage">
+          {% if page.handle == 'about' %}
+          <li><strong>ABOUT KAMI</strong></li>
+          <li></li>
+          {% endif %}
+          {% for link in linklists[h].links %}
+          <li><a href="{{link.url}}">{{link.title}}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="grid__item large--five-sixths">
+        {% if page.handle == 'about' %}
+        <header class="section-header text-center">
+          <h1>{{ page.title }}</h1>
+        </header>
+        {% endif %}
+        <div class="rte rte--nomargin rte--indented-images">
+          {{ page.content }}
+        </div>
+      </div>
+      {% else %}
+      <div class="grid__item">
+        <div class="rte rte--nomargin rte--indented-images">
+          {{ page.content }}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>

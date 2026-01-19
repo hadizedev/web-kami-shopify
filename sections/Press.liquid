@@ -1,0 +1,69 @@
+{% for block in section.blocks reversed %}
+<article class="grid__item large--one-third medium--one-half">
+
+  <div class="grid-image">
+    <a class="article__featured-image-link" href="{{block.settings.press_link}}">
+      <noscript>
+        <img src="{{ block.settings.image | img_url:'275x' }}" alt="{{block.settings.press_title}}" />
+      </noscript>
+      <div class="article__featured-image-wrapper">
+        <img src="{{ block.settings.image | img_url:'275x' }}" alt="{{block.settings.press_title}}" />
+      </div>
+    </a>
+  </div>
+  <p class="blog__meta post-info">
+    <span class="post-date">
+      <span itemprop="datePublished" content="Friday, July 06, 2018">
+        <time datetime="{{block.settings.press_date}}">{{block.settings.press_date}}</time>
+      </span>
+    </span>
+  </p>
+  <h2 class="h3">
+    <a class="article__heading-link" href="{{block.settings.press_link}}" title="Hati-hati, Hindari 6 Kesalahan Membeli Bunga Secara Online Ini!">
+      {{block.settings.press_title}}
+    </a>
+  </h2>
+</article>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Press",
+    "class": "page-press",
+    "max_blocks": 50,
+	"blocks": [
+      {
+        "type": "banner",
+        "name": "press",
+        "settings": [
+          {
+			"type": "text",
+			"id": "press_title",
+			"label": "Press Title"
+		  },
+          {
+			"type": "text",
+			"id": "press_date",
+			"label": "Press Date"
+		  },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "press_link",
+            "label": "Press link"
+          }
+        ]
+      }
+    ],
+	"presets": [
+		{
+			"category": "Page",
+			"name": "Press"
+		}
+	]
+  }
+{% endschema %}

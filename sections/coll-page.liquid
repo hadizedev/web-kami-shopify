@@ -1,0 +1,66 @@
+{% include 'coll-page' %}
+{% schema %}
+  {
+    "name": "Coll Page",
+    "max_blocks": 50,
+	"blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "image_enable",
+            "label": "Enable Image?",
+			"default": true
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image for Desktop"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Slide link"
+          },
+          {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+	"settings":[
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title Section"
+		},
+          {
+            "type": "checkbox",
+            "id": "image_mobile_enable",
+            "label": "Enable Image for Mobile?",
+			"default": true
+          },
+          {
+            "type": "text",
+            "id": "columns",
+            "label": "Column",
+			"default": "3"
+          },
+          {
+            "type": "checkbox",
+            "id": "zoom_enable",
+            "label": "Enable Zoom?",
+			"default": true
+          }
+	  ]
+  }
+{% endschema %}

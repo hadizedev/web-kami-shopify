@@ -1,0 +1,130 @@
+<style>
+  #collection-list-custom .left-collection-top ul, 
+  #collection-list-custom .right-collection-top ul, 
+  #collection-list-custom .right-collection-btm ul {margin: 0;}
+  #collection-list-custom li {position: relative;list-style-type: none;margin: 0;}
+  #collection-list-custom a {display: block;}
+  #collection-list-custom img {width: 100%;display: block;}
+  #collection-list-custom .title-coll {display: none;}
+  #collection-list-custom .title-coll {position: absolute;top: 50%;width: 100%;margin-top: -20px;margin-left: -10px;text-align: center;}
+  #collection-list-custom .title-coll h3 {font-family: 'Gotham-Bold';letter-spacing: normal;font-weight: bold;font-size: 16px;}
+  #collection-list-custom li:hover .title-coll {display: block;}
+  #collection-list-custom li:hover img {opacity: 0.3;}
+  #collection-list-custom .grid.collection-grid .grid__item {padding: 0;}
+</style>
+<div id="collection-list-custom">
+  <div class="wrapperx">
+    {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2 class="h1 section-header__title">{{ section.settings.title | escape }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="grid collection-grid">
+      <div class="grid__item medium--two-thirds large--two-thirds left-collection">
+        <div class="left-collection-top">
+          <ul>
+            <li>
+              <a href="">
+                <img src="{{'featured-coll-1.png' | asset_url}}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  Collection First
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="left-collection-btm">
+          <ul class="grid-uniform">
+            <li class="grid__item left-collection-btm-1 medium--one-half large--one-half">
+              <a href=""><img src="{{'featured-coll-3.png' | asset_url}}" alt=""/></a>
+              <div class="title-coll">
+                <h3>
+                  Collection Second
+                </h3>
+              </div>
+            </li>
+            <li class="grid__item left-collection-btm-2 medium--one-half large--one-half">
+              <a href=""><img src="{{'featured-coll-31.png' | asset_url}}" alt=""/></a>
+              <div class="title-coll">
+                <h3>
+                  Collection Third
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid__item medium--one-third large--one-third right-collection">
+        <div class="right-collection-top">
+          <ul>
+            <li>
+              <a href=""><img src="{{'featured-coll-2.png' | asset_url}}" alt=""/></a>
+              <div class="title-coll">
+                <h3>
+                  Collection Fourth
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="right-collection-btm">
+          <ul>
+            <li>
+              <a href=""><img src="{{'featured-coll-4.png' | asset_url}}" alt=""/></a>
+              <div class="title-coll">
+                <h3>
+                  Collection Fifth
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Featured Collection 2",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collection list"
+      }
+    ],
+    "presets": [{
+      "name": "Featured Collection 2",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

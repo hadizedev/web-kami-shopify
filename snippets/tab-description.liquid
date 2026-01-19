@@ -1,0 +1,27 @@
+{% for block in section.blocks %}
+{% assign prod = block.settings.product %}
+{% if product.handle == prod %}
+<div id="accordion">
+  <h3>{{block.settings.title_size}}<span class="icon icon-arrow-down"></span></h3>
+  <div style="display:none;">
+    {{block.settings.text_size}}
+    {% if block.settings.image_size_info != blank %}
+    <img src="{{block.settings.image_size_info | img_url: 'large'}}"/>
+    {% endif %}
+  </div>
+  <h3>{{block.settings.title_fit}}<span class="icon icon-arrow-down"></span></h3>
+  <div style="display:none;">
+    {{block.settings.text_fit}}
+    {% if block.settings.image_fit_info != blank %}
+    <img src="{{block.settings.image_fit_info | img_url: 'large'}}"/>
+    {% endif %}
+  </div>
+  <h3>{{block.settings.title_handle_care}}<span class="icon icon-arrow-down"></span></h3>
+  <div style="display:none;">
+    <div class="panel-body">
+      {{block.settings.text_handle_care}}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}

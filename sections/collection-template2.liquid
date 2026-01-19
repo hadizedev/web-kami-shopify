@@ -1,0 +1,156 @@
+<style>
+  .sub-menu-coll {list-style-type: none;max-width: 75%;margin: 0 auto 25px;}
+  .sub-menu-coll li a {padding: 4px 15px;font-weight: 400; font-style: normal;text-transform: uppercase;letter-spacing: 0.15em;}
+
+  @media screen and (min-width: 769px){
+    .sub-menu-coll li {display: inline-block;}
+  }
+</style>
+<!-- /templates/collection.liquid -->
+<div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template" data-grid-type="{{ section.settings.collection_products_grid }}">
+  {% comment %}
+  Collection template, used on collection.liquid and collection.image.liquid
+  {% endcomment %}
+
+  {% paginate collection.products by 30 %}
+
+
+  {% include 'sidebar-collection' %}
+
+  <div class="grid__item large--five-sixths">
+
+    <header class="section-header text-left">
+      <h1>{{ collection.title }}</h1>
+
+      {% if collection.description != blank %}
+      <div class="grid">
+        <div class="grid__item">
+          <div class="rte">
+            {{ collection.description }}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="grid--full collection-sorting{% if section.settings.collection_sort_enable %} collection-sorting--enabled{% endif %}">
+        {% if section.settings.collection_sort_enable %}
+        {% include 'collection-sorting' %}
+        {% endif %}
+      </div>
+
+
+    </header>
+
+    {% if section.settings.collection_products_grid == 'collage' %}
+    <div class="grid grid-collage">
+      {% comment %}
+      Loop through our products in the current collection.
+      See the snippet 'snippets/product-grid-collage.liquid'.
+
+      `is_reverse_row__product`, `three_row_index__product`, `collection_product_count`, and `divisible_by_three__product` are
+      all used by 'snippets/product-grid-collage.liquid'
+      {% endcomment %}
+      {% assign is_reverse_row__product = false %}
+      {% assign three_row_index__product = 0 %}
+      {% assign collection_product_count__product = collection.products.size %}
+      {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
+      {% for product in collection.products %}
+      {% unless product.tags contains 'old' %}
+      {% include 'product-grid-collage' %}
+      {% endunless  %}
+      {% else %}
+
+      {% if shop.products_count == 0 %}
+      {% comment %}
+      Add default products to help with onboarding for collections/all only
+      {% endcomment %}
+      {% include 'onboarding-featured-products' %}
+      {% else %}
+      {% comment %}
+      If collection exists but is empty, display message
+      {% endcomment %}
+      <div class="grid__item text-left">
+        <p>{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+      {% endif %}
+      {% endfor %}
+
+    </div>
+    {% elsif section.settings.collection_products_grid == 'grid' %}
+    <div class="grid-uniform">
+      {% assign grid_item_width = 'medium--one-third large--one-third' %}
+      {% for product in collection.products %}
+      {% unless product.unavailable %}
+      {% unless product.tags contains 'old' %}
+      {% include 'product-grid-item' %}
+      {% endunless %}
+      {% endunless %}
+      {% else %}
+      {% if collection.handle == 'all' %}
+      {% comment %}
+      Add default products to help with onboarding for collections/all only
+      {% endcomment %}
+      {% include 'onboarding-featured-products' %}
+      {% else %}
+      {% comment %}
+      If collection exists but is empty, display message
+      {% endcomment %}
+      <div class="grid__item text-left">
+        <p>{{ 'collections.general.no_matches' | t }}</p>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+  {% include 'pagination' %}
+  {% endif %}
+
+  {% endpaginate %}
+
+  <script>
+    $(document).ready(function(){
+      $(".site-nav--active").parents("li").addClass("open");
+    });
+  </script>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection pages New",
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_products_grid",
+        "label": "Grid style",
+        "options": [
+          {
+            "value": "collage",
+            "label": "Collage"
+          },
+          {
+            "value": "grid",
+            "label": "Grid"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sort_enable",
+        "label": "Enable collection sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_tags_enable",
+        "label": "Show collection tags"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_vendor_enable",
+        "label": "Show product vendor"
+      }
+    ]
+  }
+{% endschema %}

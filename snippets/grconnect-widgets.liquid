@@ -1,0 +1,8 @@
+{% if customer %}
+                                    {% assign customerId = customer.id %}
+                                    {% assign customerName = customer.name %}
+                                    {% assign customerEmail = customer.email %}
+                                {% endif %}
+                                <script>
+                                var AMGRConfig = {user : {name : "{{ customerName }}", email : "{{ customerEmail }}", id : "{{ customerId }}", country : ""}, site : {id : "31847", domain : "kamiideas.myshopify.com", platform : "gr_shopify"}};
+                                </script>

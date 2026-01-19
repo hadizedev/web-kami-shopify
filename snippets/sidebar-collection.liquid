@@ -1,0 +1,62 @@
+<style>
+  /** Sidebar */
+  #sidebar-coll {padding-left: 5px;}
+  .sidebarcoll-menu {margin: 0;}
+  .sidebarcoll-menu li {list-style-type: none;}
+  .sidebarcoll-menu>li>a {text-transform: uppercase;font-weight: bold;}
+  .site-nav__dropdownx {padding-left: 7px;margin-left: 0;}
+  .site-nav__itemx.site-nav--has-dropdownx.site-nav--active .site-nav__dropdownx {display: block;}
+  .sidebarcoll-menu>li {margin-bottom: 15px;}
+  .site-nav__itemx.site-nav--has-dropdownx.open .site-nav__dropdownx {display: block;}
+</style>
+<div id="sidebar-coll" class="grid__item large--one-sixth large--text-left medium-down--hide">
+  {% if linklists['shop'].links.size > 0 %}
+  <ul class="sidebarcoll-menu">
+    {% for link in linklists['shop'].links %}
+    {% if link.links != blank %}
+    {% assign parent_index = forloop.index %}
+    <li class="site-nav__itemx site-nav--has-dropdownx {% if link.active %}site-nav--active{% endif %}" aria-haspopup="true" data-meganav-type="parent">
+      <a href="{{ link.url }}" class="site-nav__linkx" data-meganav-type="parent" aria-controls="MenuParent-{{ parent_index }}" aria-expanded="false" {% unless template.name == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+        {{ link.title | escape }}
+      </a>
+      <ul id="MenuParent-{{ parent_index }}" class="site-nav__dropdownx {% if link.levels == 2 %}site-nav--has-grandchildren{% endif %}" data-meganav-dropdown>
+        {% for childlink in link.links %}
+        {% if childlink.links != blank %}
+        {% assign child_index = forloop.index %}
+        <li class="site-nav__itemx site-nav--has-dropdownx site-nav--has-dropdown-grandchildx {% if childlink.active %}site-nav--active{% endif %}" aria-haspopup="true">
+          <a href="{{ childlink.url }}" class="site-nav__dropdown-link" aria-controls="MenuChildren-{{ parent_index }}-{{ child_index }}" data-meganav-type="parent" {% unless template.name == 'index' %}{% if childlink.active %}aria-current="page"{% endif %}{% endunless%} tabindex="-1">
+            {{ childlink.title | escape }}
+          </a>
+          <div class="site-nav__dropdown-grandchildx">
+            <ul id="MenuChildren-{{ parent_index }}-{{ child_index }}" data-meganav-dropdown>
+              {% for grandchildlink in childlink.links %}
+              <li{% if grandchildlink.active %} class="site-nav--active"{% endif %}>
+                <a href="{{ grandchildlink.url }}" class="site-nav__dropdown-link" data-meganav-type="child" {% unless template.name == 'index' %}{% if grandchildlink.active %}aria-current="page"{% endif %}{% endunless %} tabindex="-1">
+                  {{ grandchildlink.title | escape }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% else %}
+        <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+          <a href="{{ childlink.url }}" class="site-nav__dropdown-linkx" data-meganav-type="child" {% if childlink.active %}aria-current="page"{% endif %} tabindex="-1">
+            {{ childlink.title | escape }}
+          </a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </li>
+    {% else %}
+    <li class="site-nav__itemx{% if link.active %} site-nav--active{% endif %}">
+      <a href="{{ link.url }}" class="site-nav__link" data-meganav-type="child" {% unless template.name == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+        {{ link.title | escape }}
+      </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>

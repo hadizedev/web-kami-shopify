@@ -1,0 +1,87 @@
+<style>
+  .banner-depstore {margin-bottom: 20px;}
+  .section-deptstore .btn {
+    padding: 5px 10px;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    margin-left: -55px;
+  }
+  .section-deptstore .grid__item {
+    margin-bottom: 15px;
+  }
+  .border-wrapper {
+    position: relative;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    min-height: 200px;
+  }
+  .grid_wrapper {
+    padding: 0 40px;
+  }
+  .section-deptstore .grid-uniform {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .section-deptstore .grid-uniform h2 {margin-left: 15px;}
+  @media (max-width: 590px){
+    .section-deptstore .btn {
+      position: inherit;
+      bottom: inherit;
+      left: inherit;
+      margin-left: inherit;
+    }
+
+    .border-wrapper {
+      min-height: auto;
+    }
+  }
+</style>
+{% section 'banner-depstore' %}
+<div id="vacancy-masonry" class="grid-masonry grid-uniform">
+  <div class="grid__item item vacancy-holder grid-product one-whole medium--one-half large--one-third">
+    {% section 'item-depstore' %}
+  </div>
+  <div class="grid__item item vacancy-holder grid-product one-whole medium--one-half large--one-third">
+    {% section 'item-depstore2' %}
+  </div>
+  <div class="grid__item item vacancy-holder grid-product one-whole medium--one-half large--one-third">
+    {% section 'item-depstore3' %}
+  </div>
+  <div class="grid__item item vacancy-holder grid-product one-whole medium--one-half large--one-third">
+    {% section 'item-depstore4' %}
+  </div>
+  <div class="grid__item item vacancy-holder grid-product one-whole medium--one-half large--one-third">
+    {% section 'item-depstore5' %}
+  </div>
+</div>
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script>
+  $(window).load(function(){
+    $('#vacancy-masonry').masonry({
+      itemSelector: '.vacancy-holder',
+      horizontalOrder: true
+    });
+  });
+</script>

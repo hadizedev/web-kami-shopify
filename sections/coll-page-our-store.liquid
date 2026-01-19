@@ -1,0 +1,111 @@
+{% include 'coll-page' %}
+{% schema %}
+  {
+    "name": "Our Store",
+    "max_blocks": 50,
+	"blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "image_enable",
+            "label": "Enable Image?",
+			"default": true
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "select",
+            "id": "select_media",
+            "label": "Choose Media",
+            "options": [
+              {
+                "value": "img",
+                "label": "Image"
+              },
+              {
+                "value": "video",
+                "label": "Video"
+              }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image for Desktop"
+          },
+          {
+            "type": "text",
+            "id": "video",
+            "label": "Video"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Slide link"
+          },
+          {
+            "type": "richtext",
+            "id": "desc",
+            "label": "Content"
+          },
+          {
+            "type": "header",
+            "content": "Contact URL"
+          },
+          {
+            "type": "checkbox",
+            "id": "link_store",
+            "label": "Enable Link Address ?",
+			"default": false
+          },
+          {
+            "type": "text",
+            "id": "link_ig",
+            "label": "Instagram"
+          },
+          {
+            "type": "text",
+            "id": "link_wa",
+            "label": "Whatsapp"
+          },
+          {
+            "type": "text",
+            "id": "link_map",
+            "label": "Map"
+          }
+        ]
+      }
+    ],
+	"settings":[
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title Section"
+		},
+          {
+            "type": "checkbox",
+            "id": "image_mobile_enable",
+            "label": "Enable Image for Mobile?",
+			"default": true
+          },
+          {
+            "type": "text",
+            "id": "columns",
+            "label": "Column",
+			"default": "3"
+          },
+          {
+            "type": "checkbox",
+            "id": "zoom_enable",
+            "label": "Enable Zoom?",
+			"default": true
+          }
+	  ]
+  }
+{% endschema %}

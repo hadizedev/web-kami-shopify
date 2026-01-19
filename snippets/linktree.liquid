@@ -1,0 +1,92 @@
+<style>
+  #shopify-section-{{section.id}} {order: {{section.settings.sort}}}
+  .item-data .sub {
+    position: relative;
+    border: 2px solid;
+    margin-bottom: 15px;
+    border-radius: 46px;
+    padding: 22px 0;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .item-data .sub-heading {
+    border: none;
+    padding: 0;
+    text-align: left;
+    font-weight: 600;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    cursor: default;
+  }
+  .item-data .sub img {
+    display: block;
+    margin-left: 0;
+  }
+  .item-data .sub.has-image {
+    padding-top: 0;
+  }
+  .item-data .sub.has-image .subtitle {
+    padding-top: 20px;
+  }
+  .item-data .sub p {
+    text-align: center;
+    font-size: 16px;
+  }
+  .item-data .sub .logo {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    margin-left: 0 !important;
+    border-radius: 100%;
+  }
+
+  @media (max-width: 480px) {
+    .item-data .sub {
+      padding: 13px 0;
+    }
+    .item-data .sub p * {
+      display: block;
+      font-size: 12px;
+    }
+    .item-data .sub p .space {
+      display: none;
+    }
+    .item-data .sub .logo {
+      top: 8px;
+      left: 10px;
+    }
+  }
+
+  @media (max-width: 375px) {
+  .item-data .sub .logo {
+      width: 40px;
+      height: 40px;
+      top: 11px;
+    }
+  }
+</style>
+{% if section.settings.heading != blank %}
+<h2>{{ section.settings.heading }}</h2>
+{% endif %}
+<div class='item-data'>
+  {% for block in section.blocks %}
+    <div class="sub{% if block.settings.sub_heading_enable %} sub-heading{% endif %}{% if block.settings.image != blank %} has-image{% endif %}" data-href="{{block.settings.url}}">
+        {% if block.settings.image != blank %}
+        <div class="image">
+            <img src="{{block.settings.image | img_url: '640x'}}" alt="" width="100%" height="auto"/>
+        </div>
+        {% endif %}
+        <div class="subtitle">
+          {% if block.settings.title != blank or block.settings.subtitle != blank %}
+            {%  if block.settings.logo != blank %}
+                <img class="logo" src="{{block.settings.logo | img_url: '75x'}}" width="75px" height="75px" alt="" class="logo_title"/>
+            {% endif %}
+            <p style="margin: 0;"><strong>{{block.settings.title}}{% if block.settings.subtitle != blank %}<span class="space"> - </span>{% endif %}</strong><span>{{block.settings.subtitle}}</span></p>
+          {% endif %}
+        </div>
+    </div>
+  {% endfor %}
+  </div>

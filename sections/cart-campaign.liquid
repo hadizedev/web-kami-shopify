@@ -1,0 +1,96 @@
+{% if section.settings.show_cartcampaign %}
+<style>
+  .cart__row.cart_campaign {
+    border: none;
+    margin: 0;
+    padding-top: 0;
+  }
+  .cart__row.cart_campaign p span {
+    color: red;
+  }
+</style>
+<div class="cart__row cart_campaign">
+  {% assign tg = section.settings.type_campaign %}
+  {% assign tg2 = section.settings.type_campaign2 %}
+  {% assign tg3 = section.settings.type_campaign3 %}
+  {% assign tg4 = section.settings.type_campaign4 %}
+  {% assign val = section.settings.min_order | times: 100 %}
+  {% for item in cart.items %}
+  {% if item.product.type == tg or item.product.type == tg2 or item.product.type == tg3 or item.product.type == tg4 %}
+  <input type="hidden" class="line_pricex" data-product="{{item.product.type}}" value="{{item.line_price}}">
+  {% endif %}
+  {% endfor %}
+  <p class="text_campaign"></p>
+</div>
+<script>
+  priceCampaign = 0;
+  no = "{{section.settings.before_val}}";
+  yes = "{{section.settings.after_val}}";
+  $(".line_pricex").each(function(){
+    priceCampaign += parseInt($(this).val())
+  });
+  console.log(priceCampaign);
+  if(priceCampaign >= {{val}}){
+    $(".text_campaign").html(yes);
+  } else {
+    $(".text_campaign").html(no);
+  }
+</script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Cart Campaign",
+	"class": "cart_section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_cartcampaign",
+        "label": "Show Cart Campaign",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "type_campaign",
+        "label": "Type Product 1",
+		"default": "Dress"
+      },
+      {
+        "type": "text",
+        "id": "type_campaign2",
+        "label": "Type Product 2",
+		"default": "Dress"
+      },
+      {
+        "type": "text",
+        "id": "type_campaign3",
+        "label": "Type Product 3",
+		"default": "Dress"
+      },
+      {
+        "type": "text",
+        "id": "type_campaign4",
+        "label": "Type Product 4",
+		"default": "Dress"
+      },
+      {
+        "type": "text",
+        "id": "min_order",
+        "label": "Min Order",
+        "default": "1000000",
+        "info": "Tanpa titik koma"
+      },
+      {
+        "type": "textarea",
+        "id": "before_val",
+        "label": "Text before",
+        "default": "Dapatkan mistery box setelah membeli Dress senilai 1juta"
+      },
+      {
+        "type": "textarea",
+        "id": "after_val",
+        "label": "Text after",
+        "default": "Selamat Anda mendapatkan mistery box"
+      }
+    ]
+  }
+{% endschema %}

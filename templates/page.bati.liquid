@@ -1,0 +1,32 @@
+<!-- /templates/page.bati.liquid -->
+<script src="https://wifkain-agent.batiinvestasi.ai/sdk/v1/bati.js?clientId=eyJkb21haW4iOiJ5aXhianFqb3VicGtrdXM1LTIyMzA4NDU5OS5zaG9waWZ5cHJldmlldy5jb20iLCJ0aW1lc3RhbXAiOjE3NjI5MzQyNjY0ODksIm5vbmNlIjoiMWE4YjE4N2EyYTkwOTcyODM0MTJiYmE4YjA1MjQzMDQifS45NzBmMmQ5M2VmZTFjYTM4MjQ0ZGQxZTFmZjUxMTA3OTU3MjhjNDE5Mjg1NjE0ODE0MDFjNDcxMGMxNmFkZDRk"></script>
+<script>
+    window.BatiConfig = {
+    baseUrl: "https://wifkain-agent.batiinvestasi.ai",
+    integrationId: "example-store",
+    persistKey: "example-storefront",
+    preload: true,
+    mode: "floating",
+    requiredParams: "bati",
+    widgetOnly: {
+        enabled: true,
+        welcomingMessage: "👋 Hi! How can I help you?",
+        showWelcomingMessage: true,
+    },
+    autoOpen: {
+        enabled: true,
+        delay: 2000,
+    },
+    button: {
+        size: 48,
+        showLabel: false,
+    },
+    floating: {
+        side: "right",
+        width: 500,
+        animationDuration: 200,
+        borderRadius: 10,
+    } 
+    };
+</script>
+{% section 'collection-template2' %}

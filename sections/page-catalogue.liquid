@@ -1,0 +1,57 @@
+{% for block in section.blocks %}
+<div class="grid__item large--one-third medium--one-half">
+
+  <div class="grid-image">
+    <a class="article__featured-image-link" href="{{block.settings.press_link}}">
+      <noscript>
+        <img src="{{ block.settings.image | img_url:'275x' }}" alt="{{block.settings.press_title}}" />
+      </noscript>
+      <div class="article__featured-image-wrapper">
+        <img src="{{ block.settings.image | img_url:'275x' }}" alt="{{block.settings.press_title}}" />
+      </div>
+    </a>
+  </div>
+</div>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Catalogue",
+    "class": "page-catalogue",
+    "max_blocks": 50,
+	"blocks": [
+      {
+        "type": "banner",
+        "name": "press",
+        "settings": [
+          {
+			"type": "text",
+			"id": "press_title",
+			"label": "Press Title"
+		  },
+          {
+			"type": "text",
+			"id": "press_date",
+			"label": "Press Date"
+		  },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "press_link",
+            "label": "Press link"
+          }
+        ]
+      }
+    ],
+	"presets": [
+		{
+			"category": "Page",
+			"name": "Press"
+		}
+	]
+  }
+{% endschema %}

@@ -1,0 +1,44 @@
+{% render 'catalog' %}
+
+{% schema %}
+  {
+    "name": "Katalog",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "catalog_1",
+        "label": "Katalog 1",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "param1",
+        "label": "Param 1",
+        "default": "kimmonia"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "slide_link",
+            "label": "Slide link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

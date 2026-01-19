@@ -1,0 +1,48 @@
+{% include 'item-depstore' %}
+{% schema %}
+  {
+    "name": "Dept. Stores 2",
+    "class": "section-deptstore",
+    "max_blocks": 50,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Main Title"
+      }
+    ],
+    "blocks" : [
+      {
+        "type": "text",
+        "name": "text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Location"
+          },
+          {
+            "type": "richtext",
+            "id": "details_depstore",
+            "label": "Detail Store"
+          },
+          {
+            "type": "text",
+            "id": "btn_depstore",
+            "label": "Button Store"
+          },
+          {
+            "type": "text",
+            "id": "phone",
+            "label": "Phone Store (WA)"
+          },
+          {
+            "type": "text",
+            "id": "text_message",
+            "label": "Message Store (WA)"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

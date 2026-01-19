@@ -1,0 +1,66 @@
+{% for block in section.blocks %}
+{% if block.settings.image != blank %}
+<div class="grid__item large--one-half item">
+  <div class="thumbnail text-center" style="margin-bottom: 5px;">
+    <a class="works_popup" data-fancybox-type="iframe" href="#video{{forloop.index}}">
+      <img class="img-responsive" style="width: 100%;" src="{{ block.settings.image | img_url:'500x560' }}"></a>
+    <p class="text-center weight300">{{ block.settings.title }}</p>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+{% for block in section.blocks %}
+<div class="modal" id="video{{forloop.index}}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <a href="#close-modal" rel="modal:close" class="close-modal ">x</a>
+        <iframe width="420" height="315" src="{{ block.settings.link}}?autoplay=0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% schema %}
+  {
+    "name": "Video",
+    "class": "video-page",
+    "max_blocks": 30,
+	"blocks": [
+      {
+        "type": "banner",
+        "name": "Banner_and_text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "link",
+            "label": "Slide link"
+          },
+          {
+			"type": "text",
+			"id": "title",
+			"label": "Banner Title"
+		  }
+        ]
+      }
+    ],
+	"settings":[
+		{
+			"type": "text",
+			"id": "section_title",
+			"label": "Title Section"
+		}
+	  ],
+	"presets": [
+		{
+			"category": "Page",
+			"name": "Video"
+		}
+	]
+  }
+{% endschema %}

@@ -1,0 +1,172 @@
+<style>
+  .sub-menu-coll {list-style-type: none;max-width: 75%;margin: 0 auto 25px;}
+  .sub-menu-coll li a {padding: 4px 15px;font-weight: 400; font-style: normal;text-transform: uppercase;letter-spacing: 0.15em;}
+  
+  @media screen and (min-width: 769px){
+    .sub-menu-coll li {display: inline-block;}
+  }
+</style>
+<!-- /templates/collection.liquid -->
+<div id="CollectionSection" data-section-id="{{ section.id }}" data-section-type="collection-template" data-grid-type="{{ section.settings.collection_products_grid }}">
+  {% include 'collection-template' %}
+</div>
+
+<script>
+  var swiper = new Swiper(".collection_banner", {
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Collection pages",
+    "max_blocks": 100,
+    "blocks" : [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "Choose Collection"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_enable_1",
+            "label": "Image 1 Enable?",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image 1"
+          },
+          {
+            "type": "url",
+            "id": "image_url_1",
+            "label": "image link 1"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_enable_2",
+            "label": "Image 2 Enable?",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image 2"
+          },
+          {
+            "type": "url",
+            "id": "image_url_2",
+            "label": "image link 2"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_enable_3",
+            "label": "Image 3 Enable?",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "Image 3"
+          },
+          {
+            "type": "url",
+            "id": "image_url_3",
+            "label": "image link 3"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_enable_4",
+            "label": "Image 4 Enable?",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "Image 4"
+          },
+          {
+            "type": "url",
+            "id": "image_url_4",
+            "label": "image link 4"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_enable_5",
+            "label": "Image 5 Enable?",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_5",
+            "label": "Image 5"
+          },
+          {
+            "type": "url",
+            "id": "image_url_5",
+            "label": "image link 5"
+          },
+          {
+            "type": "checkbox",
+            "id": "image_enable_6",
+            "label": "Image 6 Enable?",
+            "default": true
+          },
+          {
+            "type": "image_picker",
+            "id": "image_6",
+            "label": "Image 6"
+          },
+          {
+            "type": "url",
+            "id": "image_url_6",
+            "label": "image link 6"
+          }
+        ]
+      }
+    ],
+    "settings": [
+      {
+        "type": "select",
+        "id": "collection_products_grid",
+        "label": "Grid style",
+        "options": [
+          {
+            "value": "collage",
+            "label": "Collage"
+          },
+          {
+            "value": "grid",
+            "label": "Grid"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_sort_enable",
+        "label": "Enable collection sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "collection_tags_enable",
+        "label": "Show collection tags"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_vendor_enable",
+        "label": "Show product vendor"
+      }
+    ]
+  }
+{% endschema %}

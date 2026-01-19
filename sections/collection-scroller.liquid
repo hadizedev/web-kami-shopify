@@ -1,0 +1,137 @@
+<style>
+  #category-scroller .swiper-slide a,
+  #category-scroller .swiper-slide img {width: 100%;display: block;}
+
+  #category-scroller .swiper-pagination {width: 100%;left: 0;}
+  #category-scroller .swiper-pagination-bullet {width: 20px;height: 4px;border-radius: 5px;background: #fff;opacity: 1;margin: 0 3px;}
+  #category-scroller .swiper-pagination-bullet-active {background: #ae9c90;box-shadow: 1px 2px 2px 0px #7c716b;width: 40px;}
+  .category-scroller p {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 5px 10px;
+    background: rgba(139,128,122,0.6) !important;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+    display: none;
+  }
+  .category-scroller .swiper-slide:hover p {display: block;}
+  .category-scroller .swiper-slide:hover img {opacity: 0.6;}
+  .carousel-button-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25%);
+    right: 2em;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .icon.icon-chevron-right {
+    width: 2.1em;
+    height: 2.1em;
+    padding: 0.6em;
+    position: relative;
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5));
+    background: #fff;
+    border-radius: 50%;
+  }
+  .carousel-button-prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25%);
+    left: 2em;
+    z-index: 10;
+    cursor: pointer;
+  }
+  .icon.icon-chevron-left {
+    width: 2.1em;
+    height: 2.1em;
+    padding: 0.6em;
+    position: relative;
+    filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5));
+    background: #fff;
+    border-radius: 50%;
+  }
+  .swiper-button-disabled {
+    opacity: .4;
+  }
+</style>
+
+<div id="category-scroller">
+  <div class="wrapperx">
+    <div class="swiper-container category-scroller">
+      <div class="swiper-wrapper">
+        
+        {% for product in collections['new-arrival'].products limit: 10 %}
+        {% comment %}
+        {% include 'bold-product' with product, hide_action: 'skip' %}
+        {% endcomment %}
+        <div class="swiper-slide">
+          <a href="{{product.url}}">
+            <img class="collection-img" src="{{ product.featured_image.src | img_url: '300x' }}" alt="{{ product.featured_image.alt }}" />
+            <p>{{product.title}}</p>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Add Arrows -->
+      <div class="carousel-button-next">
+        <svg class="icon icon-chevron-right" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12">
+          <circle cx="40%" cy="50%" r="12" fill="white" />
+          <path d="M0.646446609,1.35355339 C0.451184464,1.15829124 0.451184464,0.841708755 0.646446609,0.646446609 C0.841708755,0.451184464 1.15829124,0.451184464 1.35355339,0.646446609 L6.35355339,5.64644661 C6.54881554,5.84170876 6.54881554,6.15829124 6.35355339,6.35355339 L1.35355339,11.3535534 C1.15829124,11.5488155 0.841708755,11.5488155 0.646446609,11.3535534 C0.451184464,11.1582912 0.451184464,10.8417088 0.646446609,10.6464466 L5.29289322,6 L0.646446609,1.35355339 Z"/>
+        </svg>
+
+      </div>
+      <div class="carousel-button-prev">
+        <svg class="icon icon-chevron-left" xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12">
+          <circle cx="60%" cy="50%" r="12" fill="white" />
+          <path d="M6.35355339,10.6464466 C6.54881554,10.8417088 6.54881554,11.1582912 6.35355339,11.3535534 C6.15829124,11.5488155 5.84170876,11.5488155 5.64644661,11.3535534 L0.646446609,6.35355339 C0.451184464,6.15829124 0.451184464,5.84170876 0.646446609,5.64644661 L5.64644661,0.646446609 C5.84170876,0.451184464 6.15829124,0.451184464 6.35355339,0.646446609 C6.54881554,0.841708755 6.54881554,1.15829124 6.35355339,1.35355339 L1.70710678,6 L6.35355339,10.6464466 Z"/>
+        </svg>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var swiper = new Swiper('.category-scroller', {
+    slidesPerView: 5,
+    navigation: {
+      nextEl: '.carousel-button-next',
+      prevEl: '.carousel-button-prev'
+    },
+    breakpoints: {
+      480: {
+        slidesPerView: 2.5
+      },
+      // when window width is <= 576px
+      768: {
+        slidesPerView: 3.5
+      },
+      992: {
+        slidesPerView: 4
+      },
+      1200: {
+        slidesPerView: 4.5
+      }
+    }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Collection scroller",
+    "settings": [
+    ],
+    "presets": [
+      {
+        "name": "Collection scroller",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}

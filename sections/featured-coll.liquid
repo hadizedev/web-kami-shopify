@@ -1,0 +1,248 @@
+<style>
+  #collection-list-custom .left-collection-top ul, 
+  #collection-list-custom .right-collection-top ul, 
+  #collection-list-custom .right-collection-btm ul {margin: 0;}
+  #collection-list-custom li {position: relative;list-style-type: none;margin: 0;}
+  #collection-list-custom a {display: block;}
+  #collection-list-custom img {width: 100%;display: block;}
+  #collection-list-custom .title-coll {display: none;}
+  #collection-list-custom .title-coll {position: absolute;top: 50%;width: 100%;margin-top: -20px;text-align: center;}
+  #collection-list-custom .title-coll h3 {font-family: 'Gotham-Bold';letter-spacing: normal;font-weight: bold;font-size: 2em;}
+  #collection-list-custom li:hover .title-coll {display: block;}
+  #collection-list-custom li:hover img {opacity: 0.3;}
+  #collection-list-custom .grid.collection-grid .grid__item {padding: 0;}
+
+  .for-mobile {display: none!important;}
+  @media (min-width: 1441px){
+    #collection-list-custom .title-coll h3 {font-size: 2.5em;}
+  }
+  @media (max-width: 590px){
+    .for-desktop {display: none!important;}
+    .for-mobile {display: block!important;}
+  }
+</style>
+<div id="collection-list-custom">
+  <div class="wrapperx">
+    {% if section.settings.heading != blank %}
+    <div class="section-header text-center">
+      <h2 class="h1 section-header__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    {% endif %}
+
+    <div class="grid collection-grid">
+      <div class="grid__item medium--two-thirds large--two-thirds left-collection">
+        <div class="left-collection-top">
+          <ul>
+            <li>
+              <a href="{{section.settings.link1}}">
+                <img class="for-desktop" src="{{ section.settings.banner1 | img_url: 'original' }}" alt=""/>
+                <img class="for-mobile" src="{{ section.settings.banner1_mobile | img_url: '480x' }}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title1}}
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="left-collection-btm">
+          <ul class="grid-uniform">
+            <li class="grid__item left-collection-btm-1 medium--one-half large--one-half">
+              <a href="{{section.settings.link2}}">
+                <img class="for-desktop" src="{{ section.settings.banner2 | img_url: 'original' }}" alt=""/>
+                <img class="for-mobile" src="{{ section.settings.banner2_mobile | img_url: '480x' }}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title2}}
+                </h3>
+              </div>
+            </li>
+            <li class="grid__item left-collection-btm-2 medium--one-half large--one-half">
+              <a href="{{section.settings.link3}}">
+                <img class="for-desktop" src="{{ section.settings.banner3 | img_url: 'original' }}" alt=""/>
+                <img class="for-mobile" src="{{ section.settings.banner3_mobile | img_url: '480x' }}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title3}}
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid__item medium--one-third large--one-third right-collection">
+        <div class="right-collection-top">
+          <ul>
+            <li>
+              <a href="{{section.settings.link4}}">
+                <img class="for-desktop" src="{{ section.settings.banner4 | img_url: 'original' }}" alt=""/>
+                <img class="for-mobile" src="{{ section.settings.banner4_mobile | img_url: '480x' }}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title4}}
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="right-collection-btm">
+          <ul>
+            <li>
+              <a href="{{section.settings.link5}}">
+                <img class="for-desktop" src="{{ section.settings.banner5 | img_url: 'original' }}" alt=""/>
+                <img class="for-mobile" src="{{ section.settings.banner5_mobile | img_url: '480x' }}" alt=""/>
+              </a>
+              <div class="title-coll">
+                <h3>
+                  {{section.settings.title5}}
+                </h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Featured Coll",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Banner 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner1",
+        "label": "Image"
+	  },
+      {
+        "type": "image_picker",
+        "id": "banner1_mobile",
+        "label": "Image for Mobile"
+	  },
+	  {
+        "type": "text",
+        "id": "title1",
+        "label": "Title"
+      },
+	  {
+        "type": "url",
+        "id": "link1",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Banner 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner2",
+        "label": "Image"
+	  },
+      {
+        "type": "image_picker",
+        "id": "banner2_mobile",
+        "label": "Image for Mobile"
+	  },
+	  {
+        "type": "text",
+        "id": "title2",
+        "label": "Title"
+      },
+	  {
+        "type": "url",
+        "id": "link2",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Banner 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner3",
+        "label": "Image"
+	  },
+      {
+        "type": "image_picker",
+        "id": "banner3_mobile",
+        "label": "Image for Mobile"
+	  },
+	  {
+        "type": "text",
+        "id": "title3",
+        "label": "Title"
+      },
+	  {
+        "type": "url",
+        "id": "link3",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Banner 4"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner4",
+        "label": "Image"
+	  },
+      {
+        "type": "image_picker",
+        "id": "banner4_mobile",
+        "label": "Image for Mobile"
+	  },
+	  {
+        "type": "text",
+        "id": "title4",
+        "label": "Title"
+      },
+	  {
+        "type": "url",
+        "id": "link4",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Banner 5"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner5",
+        "label": "Image"
+	  },
+      {
+        "type": "image_picker",
+        "id": "banner5_mobile",
+        "label": "Image for Mobile"
+	  },
+	  {
+        "type": "text",
+        "id": "title5",
+        "label": "Title"
+      },
+	  {
+        "type": "url",
+        "id": "link5",
+        "label": "Link"
+      }
+	],
+    "presets": [
+      {
+      "name": "Featured Coll",
+      "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}

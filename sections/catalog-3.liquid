@@ -1,0 +1,32 @@
+{% render 'catalog' %}
+
+{% schema %}
+  {
+    "name": "Katalog",
+    "settings": [],
+    "max_blocks": 100,
+    "blocks" : [
+      {
+        "type": "slide",
+        "name": "Katalog",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "Link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

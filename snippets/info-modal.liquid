@@ -1,0 +1,63 @@
+<div class="info-modal-product">
+  {% for image in product.images %}
+  {% if image.alt == 'Size Chart' %}
+  <p><a style="text-decoration: underline;" href="#sizechart">Size Guide</a></p>
+  {% endif %}
+  {% endfor %}
+  <p>View <a style="text-decoration: underline;" href="#returnmodal">Returns</a> and <a style="text-decoration: underline;" href="#deliverymodal">Delivery</a></p>
+</div>
+{% for image in product.images %}
+{% if image.alt == 'Size Chart' %}
+<div class="modal" id="sizechart">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body size18 weight300">
+        <a href="#close-modal" rel="modal:close" class="close-modal close-modal-chart">x</a>
+        <img src="{{ image.src | img_url: '600x' }}" alt="Size Chart"/>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+<div class="modal" id="returnmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body size18 weight300">
+        <a href="#close-modal" rel="modal:close" class="close-modal ">x</a>
+        <div class="" style="background: transparent;">
+          <h3 class="headerlogin text-center weight300">RETURNS POLICY</h3>
+        </div>
+        <div class="col-xs-12" style="font-weight: 500;">
+          <p>Please note that returns/exchanges are only done for defective items and must be done so within 3 working days from the day customer receive the package. After this duration has expired, we will not accept the return of the item. This policy was implemented to protect ourselves from customers who abuse the system. Email us at&nbsp;<a href="mailto: cs@kamiidea.com">cs@kamiidea.com</a>&nbsp;and we'll do our best to make your shopping experience as wonderful as possible.</p>
+          <p>Continue reading for more information. For defective items: If we sent a defective item, we'd gladly do an exchange with returns costs (normal mail) covered. However, the exchange has to be for the exact same item. If the exact same item is out of stock or unavailable, then an exchange for another item of equal or less value will be allowed.</p>
+          <p>To initiate your exchange/return, simply:</p>
+          <ul>
+            <li>Email us&nbsp;<a href="mailto: cs@kamiidea.com">cs@kamiidea.com</a>&nbsp;with the following details:
+              <ul>
+                <li>Order Number</li>
+                <li>Your Name</li>
+                <li>Reasons for the exchange</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p>Note:</p>
+
+          <p>(1) We reserve the rights to accept exchange requests on a case-by-case basis. (2) KAMI IDEA is not responsible for any lost of postage(s) during the returning of the goods. (3) All returned products must be unworn and unwashed (no exceptions). (4) Exchanges must be made for items of equal or lessor value. (5) Return shipping charges are the responsibility of the customer unless the return is due to a product defect or a shipping error on the part of KAMI IDEA. (6) Strictly no meetups.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="deliverymodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body size18 weight300">
+        <a href="#close-modal" rel="modal:close" class="close-modal ">x</a>
+        {{ pages['delivery-information'].content }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,466 @@
+<style type="text/css">
+  #accordion {max-width: 600px;margin: auto;}
+  .section-item {
+    margin-bottom: 16px;
+  }
+  .link{
+    background: #222;
+    background: -moz-linear-gradient(#252525, #0A0A0A) ;
+    background: -o-linear-gradient(#252525, #0A0A0A);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#252525), to(#0A0A0A));
+    background: -webkit-linear-gradient(#252525, #0A0A0A);
+    -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    color:#fff;
+    padding: 8px 10px;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 18px;
+    font-family: Arial,Verdana;
+    word-spacing: 1px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+  }
+  .link:hover{
+    background:#62ABD8 !important;
+    background: -moz-linear-gradient(#80BADE, #62ABD8) ;
+    background: -o-linear-gradient(#80BADE, #62ABD8);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#80BADE), to(#62ABD8));
+    background: -webkit-linear-gradient(#80BADE, #62ABD8);
+    -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 2px;
+  }
+  .link:active{
+    background:#62ABD8 !important;
+    background: -moz-linear-gradient(#80BADE, #62ABD8) ;
+    background: -o-linear-gradient(#80BADE, #62ABD8);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#80BADE), to(#62ABD8));
+    background: -webkit-linear-gradient(#80BADE, #62ABD8);
+    -webkit-box-shadow: inset rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    -moz-box-shadow: inset rgba(0, 0, 0, 0.4) 0px 1px 2px;
+    box-shadow: inset rgba(0, 0, 0, 0.4) 0px 1px 2px;
+  }
+
+  .container {
+    display:block;
+    width: 500px;
+    height : auto ;
+    margin: 0 auto;
+  }
+
+  .item,.itemx {
+    position: relative;
+    display: block;
+    width: inherit;
+    height: 40px;
+    border: 2px solid #000;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    padding: 9px 0;
+    border-radius: 20px;
+  }
+  .itemx a {
+    color: #000;
+    border: none!important;
+  }
+  .item:hover, .itemx:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  .item.active {
+    background-color: #000;
+    color: #fff;
+  }
+
+  .item-data {
+    display : none ; 
+  }
+  .item-data .sub {
+    position: relative;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 6px;
+    background-color: #f2f2f2;
+  }
+  .subtitle a {
+    border: none!important;
+    color: #000;
+  }
+
+  .txt_sub a {
+    border-bottom: none!important;
+  }
+
+  img.logo_title {
+    vertical-align: middle;
+    width: 30px;
+    position: absolute;
+    right: 20px;
+    bottom: 4px;
+  }
+</style>
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    $("#accordion .item").click(function () {
+      $('#accordion').find('.item-data').not($(this).next()).slideUp(300);
+      $('.active').not(this).removeClass('active');
+
+      $(this).toggleClass('active');
+      $(this).next().slideToggle(300);
+    });
+
+    var animationIsOff = $.fx.off;
+    $.fx.off = true;
+    //$('#accordion .item:eq(0)').click()
+    $.fx.off = animationIsOff;
+    
+  });
+</script>
+
+<div id="accordion">
+  {% for block in section.blocks %}
+  <div class="section-item">
+    <div class='{% if block.settings.url_title != blank %}itemx{% else %}item{% endif %}'>
+      {% if block.settings.url_title != blank %}<a href="{{block.settings.url_title}}" target="_blank">{% endif %}
+      {{block.settings.title}}
+      {% if block.settings.url_title != blank %}</a>{% endif %}
+      {% if block.settings.logo_title != blank %}<img class="logo_title" src="{{block.settings.logo_title | img_url: '75x'}}" alt=""/>{% endif %}
+    </div>
+    <div class='item-data'>
+      {% if block.settings.content1_enable %}
+      <div class="sub sub1">
+        <div class="subtitle subtitle1">
+          {% if block.settings.url_subtitle1 != blank %}<a href="{{block.settings.url_subtitle1}}" target="_blank">{% endif %}
+          {{block.settings.subtitle1}}
+          {% if block.settings.url_subtitle1 %}</a>{% endif %}
+          {% if block.settings.logo_subtitle1 != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle1 | img_url: '75x'}}" alt=""/>{% endif %}
+        </div>
+        {% if block.settings.txt_subtitle1_enable %}
+        <div class="txt_sub">
+          {{block.settings.txt_subtitle1}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if block.settings.content2_enable %}
+      <div class="sub sub2">
+        <div class="subtitle subtitle2">
+          {% if block.settings.url_subtitle2 != blank %}<a href="{{block.settings.url_subtitle2}}" target="_blank">{% endif %}
+          {{block.settings.subtitle2}}
+          {% if block.settings.url_subtitle2 %}</a>{% endif %}
+          {% if block.settings.logo_subtitle2 != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle2 | img_url: '75x'}}" alt=""/>{% endif %}
+        </div>
+        {% if block.settings.txt_subtitle2_enable %}
+        <div class="txt_sub">
+          {{block.settings.txt_subtitle2}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if block.settings.content3_enable %}
+      <div class="sub sub3">
+        <div class="subtitle subtitle3">
+          {% if block.settings.url_subtitle3 != blank %}<a href="{{block.settings.url_subtitle3}}" target="_blank">{% endif %}
+          {{block.settings.subtitle3}}
+          {% if block.settings.url_subtitle3 %}</a>{% endif %}
+          {% if block.settings.logo_subtitle3 != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle3 | img_url: '75x'}}" alt=""/>{% endif %}
+        </div>
+        {% if block.settings.txt_subtitle3_enable %}
+        <div class="txt_sub">
+          {{block.settings.txt_subtitle3}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if block.settings.content4_enable %}
+      <div class="sub sub4">
+        <div class="subtitle subtitle4">
+          {% if block.settings.url_subtitle4 != blank %}<a href="{{block.settings.url_subtitle4}}" target="_blank">{% endif %}
+          {{block.settings.subtitle4}}
+          {% if block.settings.url_subtitle4 %}</a>{% endif %}
+          {% if block.settings.logo_subtitle4 != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle4 | img_url: '75x'}}" alt=""/>{% endif %}
+        </div>
+        {% if block.settings.txt_subtitle4_enable %}
+        <div class="txt_sub">
+          {{block.settings.txt_subtitle4}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if block.settings.content5_enable %}
+      <div class="sub sub5">
+        <div class="subtitle subtitle3">
+          {% if block.settings.url_subtitle5 != blank %}<a href="{{block.settings.url_subtitle5}}" target="_blank">{% endif %}
+          {{block.settings.subtitle5}}
+          {% if block.settings.url_subtitle5 %}</a>{% endif %}
+          {% if block.settings.logo_subtitle5 != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle5 | img_url: '75x'}}" alt=""/>{% endif %}
+        </div>
+        {% if block.settings.txt_subtitle5_enable %}
+        <div class="txt_sub">
+          {{block.settings.txt_subtitle5}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% if block.settings.content6_enable %}
+      <div class="sub sub6">
+        <div class="subtitle subtitle6">
+          {% if block.settings.url_subtitle6 != blank %}<a href="{{block.settings.url_subtitle6}}" target="_blank">{% endif %}
+          {{block.settings.subtitle6}}
+          {% if block.settings.url_subtitle6 %}</a>{% endif %}
+          {% if block.settings.logo_subtitle6 != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle6 | img_url: '75x'}}" alt=""/>{% endif %}
+        </div>
+        {% if block.settings.txt_subtitle6_enable %}
+        <div class="txt_sub">
+          {{block.settings.txt_subtitle6}}
+        </div>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "Find US",
+	"class": "section-linktree",
+    "settings": [],
+	"blocks": [
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "url",
+            "id": "url_title",
+            "label": "Url Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_title",
+            "label": "Logo Title"
+          },
+          {
+            "type": "header",
+            "content": "Content 1"
+          },
+          {
+            "type": "checkbox",
+            "id": "content1_enable",
+            "label": "Enable Content 1"
+          },
+          {
+            "type": "text",
+            "id": "subtitle1",
+            "label": "Sub Title 1"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle1",
+            "label": "Url Sub Title 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle1",
+            "label": "Logo Sub Title 1"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle1_enable",
+            "label": "Enable Desc Title 1"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle1",
+            "label": "Desc Sub Title 1"
+          },
+          {
+            "type": "header",
+            "content": "Content 2"
+          },
+          {
+            "type": "checkbox",
+            "id": "content2_enable",
+            "label": "Enable Content 2"
+          },
+          {
+            "type": "text",
+            "id": "subtitle2",
+            "label": "Sub Title 2"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle2",
+            "label": "Url Sub Title 2"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle2",
+            "label": "Logo Sub Title 2"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle2_enable",
+            "label": "Enable Desc Title 2"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle2",
+            "label": "Desc Sub Title 2"
+          },
+          {
+            "type": "header",
+            "content": "Content 3"
+          },
+          {
+            "type": "checkbox",
+            "id": "content3_enable",
+            "label": "Enable Content 3"
+          },
+          {
+            "type": "text",
+            "id": "subtitle3",
+            "label": "Sub Title 3"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle3",
+            "label": "Url Sub Title 3"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle3",
+            "label": "Logo Sub Title 3"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle3_enable",
+            "label": "Enable Desc Title 3"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle3",
+            "label": "Desc Sub Title 3"
+          },
+          {
+            "type": "header",
+            "content": "Content 4"
+          },
+          {
+            "type": "checkbox",
+            "id": "content4_enable",
+            "label": "Enable Content 4"
+          },
+          {
+            "type": "text",
+            "id": "subtitle4",
+            "label": "Sub Title 4"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle4",
+            "label": "Url Sub Title 4"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle4",
+            "label": "Logo Sub Title 4"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle4_enable",
+            "label": "Enable Desc Title 4"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle4",
+            "label": "Desc Sub Title 4"
+          },
+          {
+            "type": "header",
+            "content": "Content 5"
+          },
+          {
+            "type": "checkbox",
+            "id": "content5_enable",
+            "label": "Enable Content 5"
+          },
+          {
+            "type": "text",
+            "id": "subtitle5",
+            "label": "Sub Title 5"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle5",
+            "label": "Url Sub Title 5"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle5",
+            "label": "Logo Sub Title 5"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle5_enable",
+            "label": "Enable Desc Title 5"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle5",
+            "label": "Desc Sub Title 5"
+          },
+          {
+            "type": "header",
+            "content": "Content 6"
+          },
+          {
+            "type": "checkbox",
+            "id": "content6_enable",
+            "label": "Enable Content 6"
+          },
+          {
+            "type": "text",
+            "id": "subtitle6",
+            "label": "Sub Title 6"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle6",
+            "label": "Url Sub Title 6"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle6",
+            "label": "Logo Sub Title 6"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle6_enable",
+            "label": "Enable Desc Title 6"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle6",
+            "label": "Desc Sub Title 6"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

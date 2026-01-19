@@ -1,0 +1,54 @@
+<style>
+  #shopify-section-{{section.id}} {order: {{section.settings.sort}}}
+  .item-data .sub {
+    position: relative;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 14px;
+    margin-bottom: 15px;
+    border: 2px solid #000000;
+    border-radius: 28px;
+    cursor: pointer;
+  }
+
+  .item-data .sub-heading {
+    border: none;
+    padding: 0;
+    text-align: left;
+    font-weight: 600;
+    padding-top: 10px;
+    margin-bottom: 10px;
+    cursor: default;
+  }
+
+  .item-data .sub:not(.sub-heading):hover {
+    background-color: #f0f0f0;
+  }
+
+  img.logo_title {
+    position: absolute;
+    left: 20px;
+    top: 13px;
+    margin-left: 0 !important;
+  }
+</style>
+{% if section.settings.heading != blank %}
+<h2>{{ section.settings.heading }}</h2>
+{% endif %}
+{% if section.settings.subfind_us %}
+  <div class='item-data'>
+  {% for block in section.blocks %}
+    <div class="sub{% if block.settings.sub_heading_enable %} sub-heading{% endif %}" data-href="{{block.settings.url_subtitle}}">
+      {% if block.settings.logo_subtitle != blank %}<img class="logo_title" src="{{block.settings.logo_subtitle | img_url: '75x'}}" alt=""/>{% endif %}
+      <div class="subtitle">
+        {{block.settings.title}}
+      </div>
+      {% if block.settings.txt_subtitle_enable %}
+      <div class="txt_sub">
+        {{block.settings.txt_subtitle}}
+      </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+{% endif %}

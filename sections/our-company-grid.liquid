@@ -1,0 +1,69 @@
+<style>
+  .row {display: -webkit-box;display: -moz-box;display: -ms-flexbox;display: -webkit-flex;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;}
+  .align-self-center {-ms-flex-item-align: center !important;align-self: center !important;}
+  .pl-0 {padding-left:0;}
+  .w-100 {display: block;width:100%;}
+  .ourcomtxt1, .ourcomtxt2 {padding: 15px 60px;}
+  .ourcomtxt1 h1 {font-family: 'Georgia-Bold';text-transform: capitalize;margin-bottom: 90px;font-size: 45pt;letter-spacing: normal!Important;line-height: normal;}
+  .ourcomtxt1 p, .ourcomtxt2 p {text-transform: uppercase;letter-spacing: 2px;line-height: 2;}
+  @media (max-width: 480px){
+    .ourcomtxt1, .ourcomtxt2 {padding: 15px 20px;}
+  }
+</style>
+<div class="row">
+  <div class="grid__item large--seven-twelfths pl-0">
+    <img class="w-100" src="{{ section.settings.our_company_grid1 | img_url: '1200x' }}" alt=""/>
+  </div>
+  <div class="grid__item large--five-twelfths pl-0 align-self-center ourcomtxt1">
+    <div class="case">
+      <h1>Our<br>Company.</h1>
+      <p>{{section.settings.text_grid1}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="grid__item large--seven-twelfths pl-0 align-self-center ourcomtxt2">
+    <p>{{section.settings.text_grid2}}</p>
+  </div>
+  <div class="grid__item large--five-twelfths pl-0 align-self-center">
+    <div class="case">
+      <img class="w-100" src="{{ section.settings.our_company_grid2 | img_url: '800x' }}" alt=""/>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Our Company Grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Grid 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "our_company_grid1",
+        "label": "Image"
+	  },
+	  {
+        "type": "textarea",
+        "id": "text_grid1",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Grid 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "our_company_grid2",
+        "label": "Image"
+	  },
+	  {
+        "type": "textarea",
+        "id": "text_grid2",
+        "label": "Text"
+      }
+	]
+  }
+{% endschema %}

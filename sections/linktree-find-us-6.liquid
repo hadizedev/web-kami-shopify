@@ -1,0 +1,131 @@
+{% include 'linktree-find-us' %}
+
+{% schema %}
+  {
+    "name": "Find US 6",
+	"class": "section-linktree",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "checkbox",
+        "id": "subfind_us",
+        "label": "Enable?",
+		"default": false
+      },
+      {
+        "type": "text",
+        "id": "parent_title",
+        "label": "Title Parent"
+      },
+      {
+        "type": "url",
+        "id": "url_title",
+        "label": "Url Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_title",
+        "label": "Logo Title"
+      },
+      {
+        "type": "select",
+        "id": "sort",
+        "label": "Sorting",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "7",
+            "label": "7"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          },
+          {
+            "value": "9",
+            "label": "9"
+          },
+          {
+            "value": "10",
+            "label": "10"
+          }
+		]
+	 }
+	],
+	"blocks": [
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "checkbox",
+            "id": "content_enable",
+            "label": "Enable Content"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Sub Title"
+          },
+          {
+            "type": "url",
+            "id": "url_subtitle",
+            "label": "Url Sub Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo_subtitle",
+            "label": "Logo Sub Title"
+          },
+          {
+            "type": "checkbox",
+            "id": "txt_subtitle_enable",
+            "label": "Enable Desc Title"
+          },
+          {
+            "type": "richtext",
+            "id": "txt_subtitle",
+            "label": "Desc Sub Title"
+          },
+          {
+            "type": "checkbox",
+            "id": "sub_heading_enable",
+            "label": "Enable Sub Heading",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

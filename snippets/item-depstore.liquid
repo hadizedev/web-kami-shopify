@@ -1,0 +1,14 @@
+<div class="grid-uniform">
+  <h2>{{section.settings.title}}</h2>
+  {% for block in section.blocks %}
+  <div class="grid__item grid-product one-whole">
+    <div class="grid_wrapper text-center">
+      <div class="border-wrapper">
+        <h4>{{block.settings.title}}</h4>
+        <div class="content-text">{{block.settings.details_depstore}}</div>
+        <a class="btn button" target="_blank" href="https://api.whatsapp.com/send?phone={{block.settings.phone}}&text={{block.settings.text_message}}">{{block.settings.btn_depstore}}</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

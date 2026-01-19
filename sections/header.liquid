@@ -1,0 +1,602 @@
+<style>
+  .site-header__logo img {
+    max-width: {{ section.settings.logo_max_width | escape | default: '180' | remove: 'px' | append: 'px' }};
+ 	width: 100px;
+  }
+  #toggle-menu {padding-left: 0;}
+  .site-nav {position: relative;}
+  #menu-2 {position: initial;}
+  
+  /* Modern Dropdown Styling */
+  div#MenuParent-2 {
+    overflow-y: auto;
+    max-height: 500px;
+    display: flex;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 15px 12px;
+  }
+  
+  #menu-2 ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px 18px;
+    width: 100%;
+  }
+  
+  /* Dropdown Link Styling */
+  .site-nav__dropdown {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    padding: 15px 0;
+    margin-top: 0;
+  }
+  
+  .site-nav__dropdown ul {
+    padding: 0 12px;
+    margin-left: 0;
+  }
+  
+  .site-nav__dropdown-link {
+    display: block;
+    padding: 8px 12px;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: #333;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 400;
+  }
+  
+  .site-nav__dropdown-link:hover {
+    background: #f5f5f5;
+    color: #000;
+    padding-left: 16px;
+  }
+  
+  /* Parent items in dropdown */
+  .site-nav__dropdown > ul > li {
+    margin-bottom: 2px;
+  }
+  
+  /* Category headers styling */
+  .site-nav--has-dropdown-grandchild > a {
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    display: block;
+    transition: color 0.2s ease;
+  }
+  
+  .site-nav--has-dropdown-grandchild > a:hover {
+    color: #000;
+  }
+  
+  /* Grandchild dropdown container */
+  .site-nav__dropdown-grandchild {
+    margin-top: 0;
+    margin-bottom: 14px;
+    padding: 12px 16px;
+    background: linear-gradient(to right, rgba(0,0,0,0.02) 0%, transparent 20px);
+    transition: all 0.25s ease;
+  }
+  
+  .site-nav__dropdown-grandchild:hover {
+    border-left-color: #ccc;
+    background: linear-gradient(to right, rgba(0,0,0,0.03) 0%, transparent 20px);
+  }
+  
+  .site-nav__dropdown-grandchild ul {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  
+  .site-nav__dropdown-grandchild .site-nav__dropdown-link {
+    padding: 8px 12px;
+    font-size: 12.5px;
+    color: #666;
+    font-weight: 400;
+    position: relative;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+  
+  .site-nav__dropdown-grandchild .site-nav__dropdown-link::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: all 0.2s ease;
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+  }
+  
+  .site-nav__dropdown-grandchild .site-nav__dropdown-link:hover {
+    color: #000;
+    background: rgba(0,0,0,0.04);
+    padding-left: 20px;
+    font-weight: 500;
+  }
+  
+  .site-nav__dropdown-grandchild .site-nav__dropdown-link:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+    left: 6px;
+  }
+  
+  /* Allow navigation to wrap */
+  #d-nav .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  /* Better icon spacing */
+  #d-icon .site-nav {
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  
+  /* Full width dropdown for screens below 1200px */
+  @media screen and (max-width: 1199px) {
+    #menu-2 {
+      position: static;
+    }
+    
+    div#MenuParent-2 {
+      position: fixed;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      border-radius: 0;
+      margin: 0;
+      padding: 12px 15px;
+      max-height: none;
+      overflow-y: visible;
+      box-sizing: border-box;
+    }
+    
+    #menu-2 ul {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .site-nav__dropdown-link {
+      font-size: 12px;
+      padding: 6px 10px;
+    }
+    
+    .site-nav--has-dropdown-grandchild > a {
+      font-size: 11px;
+      padding: 8px 10px 5px;
+    }
+    
+    .site-nav__dropdown-grandchild .site-nav__dropdown-link {
+      font-size: 11.5px;
+      padding: 5px 10px;
+    }
+  }
+  
+  /* Medium screens: 769px - 1024px */
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    #logo {width: 12%;}
+    #logo {padding-bottom: 8px;padding-left: 0;}
+    #d-nav {width: 50%; padding-right: 10px;}
+    #d-nav ul li {display: inline-block; margin: 0 5px;}
+    #d-nav .site-nav__link {padding: 5px 8px;}
+    #d-icon {width: 18%;}
+    #d-icon li {margin-left: 8px;}
+    #toggle-menu {display: none;}
+    #d-icon #icon-burger {display: inline-block;}
+    .grid__itemx {flex-wrap: nowrap;}
+  }
+  
+  /* Large screens: 1025px and up */
+  @media screen and (min-width: 1025px){
+    #logo {width: 10%;}
+    #logo {padding-bottom: 8px;padding-left: 0;}
+    #d-icon li {margin-left: 10px;}
+    #d-nav {width: 45%;}
+    #d-icon {width: 10%;}
+    #toggle-menu {display: none;}
+    #d-nav ul li {display: inline-block;}
+    #d-icon #icon-burger {display: inline-block;}
+  }
+  
+  @media screen and (max-width: 768px) {
+    #logo {padding-left: 0;}
+    .site-header__logo img {max-width: 100%;}
+  }
+</style>
+
+{% assign hero_full_height = true %}
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-template="{{ template.name }}">
+  <div class="header-container">
+    <div class="header-wrapper{% unless hero_full_height %} header-wrapper--over-hero{% endunless %}">
+      {% if section.settings.show_announcement %}
+        {% if section.settings.home_page_only == false or template.name == 'index' %}
+          <style>
+            .announcement-bar {
+              background-color: {{ section.settings.color_bg }};
+            }
+
+            .announcement-bar--link:hover {
+              {% assign brightness = section.settings.color_bg | color_brightness %}
+
+              {% if brightness <= 192 %}
+                {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
+                background-color: {{ section.settings.color_bg | color_lighten: lightenAmount }};
+              {% else %}
+                {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
+                background-color: {{ section.settings.color_bg | color_darken: darkenAmount }};
+              {% endif %}
+            }
+
+            .announcement-bar__message {
+              color: {{ section.settings.color_text }};
+            }
+          </style>
+
+          {% if section.settings.link == blank %}
+            <div class="announcement-bar">
+          {% else %}
+            <a href="{{ section.settings.link }}" class="announcement-bar announcement-bar--link">
+          {% endif %}
+
+            <p class="announcement-bar__message">{{ section.settings.text | escape }}</p>
+
+          {% if section.settings.link == blank %}
+            </div>
+          {% else %}
+            </a>
+          {% endif %}
+
+        {% endif %}
+      {% endif %}
+
+      <header class="site-header" role="banner">
+        <div class="wrapper">
+          <div class="grid__itemx grid--table">
+            <div id="toggle-menu" class="grid__item large--hide large--one-sixth one-quarter">
+              <div class="site-nav--open site-nav--mobile">
+                <button type="button" class="icon-fallback-text site-nav__link site-nav__link--burger js-drawer-open-button-left" aria-controls="NavDrawer">
+                  <span class="burger-icon burger-icon--top"></span>
+                  <span class="burger-icon burger-icon--mid"></span>
+                  <span class="burger-icon burger-icon--bottom"></span>
+                  <span class="fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
+              </div>
+            </div>
+            <div id="logo" class="grid__item large--one-eighth medium-down--one-half">
+              {% comment %}
+                Use the uploaded logo from theme settings if enabled.
+                Site name gets precedence with H1 tag on homepage, div on other pages.
+              {% endcomment %}
+              {% if template.name == 'index' %}
+                <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+
+                {% if section.settings.logo_max_width != blank %}
+                  {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+                {% else %}
+                  {% assign image_size = "200x" %}
+                {% endif %}
+
+                {% if section.settings.logo-inverted and template.name == 'index' %}
+                  <a href="/" itemprop="url" class="site-header__logo-link">
+                    <img src="{{ section.settings.logo-inverted | img_url: image_size }}"
+                    srcset="{{ section.settings.logo-inverted | img_url: image_size }} 1x, {{ section.settings.logo-inverted | img_url: image_size, scale: 2 }} 2x"
+                    alt="{{ section.settings.logo-inverted.alt | default: shop.name }}"
+                    itemprop="logo">
+                  </a>
+                {% elsif section.settings.logo %}
+                  <a href="/" itemprop="url" class="site-header__logo-link">
+                     <img src="{{ section.settings.logo | img_url: image_size }}"
+                     srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                     alt="{{ section.settings.logo.alt | default: shop.name }}"
+                     itemprop="logo">
+                  </a>
+                {% else %}
+                  <a href="/" itemprop="url">{{ shop.name }}</a>
+                {% endif %}
+                </h1>
+              {% endif %}
+              
+              {% if template.name != 'index' %}
+                <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+              
+                {% if section.settings.logo_noindex_max_width != blank %}
+                  {% capture image_size %}{{ section.settings.logo_noindex_max_width | escape }}x{% endcapture %}
+                {% else %}
+                  {% assign image_size = "200x" %}
+                {% endif %}
+
+                {% if section.settings.logo_noindex-inverted and template.name != 'index' %}
+                  <a href="/" itemprop="url" class="site-header__logo-link">
+                    <img src="{{ section.settings.logo_noindex-inverted | img_url: image_size }}"
+                    srcset="{{ section.settings.logo_noindex-inverted | img_url: image_size }} 1x, {{ section.settings.logo-inverted | img_url: image_size, scale: 2 }} 2x"
+                    alt="{{ section.settings.logo_noindex-inverted.alt | default: shop.name }}"
+                    itemprop="logo">
+                  </a>
+                {% elsif section.settings.logo_noindex %}
+                  <a href="/" itemprop="url" class="site-header__logo-link">
+                     <img src="{{ section.settings.logo_noindex | img_url: image_size }}"
+                     srcset="{{ section.settings.logo_noindex | img_url: image_size }} 1x, {{ section.settings.logo_noindex | img_url: image_size, scale: 2 }} 2x"
+                     alt="{{ section.settings.logo_noindex.alt | default: shop.name }}"
+                     itemprop="logo">
+                  </a>
+                {% else %}
+                  <a href="/" itemprop="url">{{ shop.name }}</a>
+                {% endif %}
+                </div>
+              {% endif %}
+              
+            </div>
+            <nav id="d-nav" class="grid__item large--three-quarters large--text-left medium-down--hide" role="navigation">
+              {% comment %}
+                List out your main-menu linklist (default)
+
+                More info on linklists:
+                  - http://docs.shopify.com/themes/liquid-variables/linklists
+              {% endcomment %}
+              <!-- begin site-nav -->
+              <ul class="site-nav" id="AccessibleNav">
+                {% for link in linklists[section.settings.main_menu_link_list].links %}
+                  {% if link.links != blank %}
+                  {% assign parent_index = forloop.index %}
+                    <li id="menu-{{ parent_index }}" class="site-nav__item site-nav--has-dropdown {% if link.active %}site-nav--active{% endif %}" aria-haspopup="true" data-meganav-type="parent">
+                      <a href="{{ link.url }}" class="site-nav__link" data-meganav-type="parent" aria-controls="MenuParent-{{ parent_index }}" aria-expanded="false" {% unless template.name == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+                        {{ link.title | escape }}
+                        <span class="icon icon-arrow-down" aria-hidden="true"></span>
+                      </a>
+                      <div id="MenuParent-{{ parent_index }}" class="site-nav__dropdown {% if link.levels == 2 %}site-nav--has-grandchildren{% endif %}" data-meganav-dropdown>
+                        <ul>
+                          {% for childlink in link.links %}
+                          {% if childlink.links != blank %}
+                          {% assign child_index = forloop.index %}
+                          <li class="site-nav__item site-nav--has-dropdown site-nav--has-dropdown-grandchild {% if childlink.active %}site-nav--active{% endif %}" aria-haspopup="true">
+                            <a href="{{ childlink.url }}" class="site-nav__dropdown-link" aria-controls="MenuChildren-{{ parent_index }}-{{ child_index }}" data-meganav-type="parent" {% unless template.name == 'index' %}{% if childlink.active %}aria-current="page"{% endif %}{% endunless%} tabindex="-1">
+                              {{ childlink.title | escape }}
+                              <span class="icon icon-arrow-down" aria-hidden="true"></span>
+                            </a>
+                            <div class="site-nav__dropdown-grandchild">
+                              <ul id="MenuChildren-{{ parent_index }}-{{ child_index }}" data-meganav-dropdown>
+                                {% for grandchildlink in childlink.links %}
+                                <li{% if grandchildlink.active %} class="site-nav--active"{% endif %}>
+                                  <a href="{{ grandchildlink.url }}" class="site-nav__dropdown-link" data-meganav-type="child" {% unless template.name == 'index' %}{% if grandchildlink.active %}aria-current="page"{% endif %}{% endunless %} tabindex="-1">
+                                    {{ grandchildlink.title | escape }}
+                                  </a>
+                                </li>
+                                {% endfor %}
+                              </ul>
+                            </div>
+                          </li>
+                          {% else %}
+                          <li{% if childlink.active %} class="site-nav--active"{% endif %}>
+                            <a href="{{ childlink.url }}" class="site-nav__dropdown-link" data-meganav-type="child" {% if childlink.active %}aria-current="page"{% endif %} tabindex="-1">
+                              {{ childlink.title | escape }}
+                            </a>
+                          </li>
+                          {% endif %}
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </li>
+                  {% else %}
+                    <li class="site-nav__item{% if link.active %} site-nav--active{% endif %}">
+                      <a href="{{ link.url }}" class="site-nav__link" data-meganav-type="child" {% unless template.name == 'index' %}{% if link.active %}aria-current="page"{% endif %}{% endunless%}>
+                        {{ link.title | escape }}
+                      </a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+
+              </ul>
+              <!-- //site-nav -->
+            </nav>
+            <div id="d-icon" class="grid__item large--one-fifth large--text-right medium-down--hide">
+              
+              <ul class="site-nav site-nav--init">
+                {% comment %}
+                <li class="site-nav__item site-nav__item--compressed">{% include 'currency-picker' %}</li>
+                {% endcomment %}
+                
+                {% capture the_snippet_auth %}{% render 'socialshopwave-widget-auth' %}{% endcapture %}
+                {% if the_snippet_auth contains 'Liquid error' %}
+                
+                {% if shop.customer_accounts_enabled %}
+                <li class="site-nav__item site-nav__expanded-item site-nav__item--compressed">
+                  <a class="site-nav__link site-nav__link--icon" href="{% if customer %}/account{% else %}/account/login{% endif %}">
+                    {% include 'user-icon' %}
+                  </a>
+                </li>
+                {% endif %}
+                                
+                {% else %}
+                {% if shop.customer_accounts_enabled %}
+                  {% if customer %}
+                  <li class="ssw-tprofile ssw-dropdown site-nav__item site-nav__expanded-item site-nav__item--compressed">
+                    <a class="ssw-dropdown-toggle site-nav__link site-nav__link--icon" data-toggle="ssw-dropdown" href="javascript:void(0);">
+                      {% include 'user-icon' %}
+                    </a>
+                    <ul class="ssw-dropdown-menu" role="menu" aria-labelledby="dLabel">
+                      <li id="customer_myorders_li"><a tabindex="-1" href="/account">{{ 'socialshopwave.my_orders' | t }}</a></li>
+                      {% render 'ssw-widget-dropdown' %}
+                      <li class="ssw-divider"></li>
+                      <li><a id="customer_logout_link" tabindex="-1" href="/account/logout">{{ 'socialshopwave.logout' | t }}</a></li>
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li class="site-nav__item site-nav__expanded-item site-nav__item--compressed">
+                    {% comment %} <a id="customer_login_link" class="site-nav__link site-nav__link--icon" href="/account" onclick="event.preventDefault()" data-toggle="ssw-modal" data-target="#login_modal" onclick="trackShopStats('login_popup_view', 'all')">
+                      {% include 'user-icon' %}
+                    </a>        {% endcomment %}
+                    <a id="customer_login_link" class="site-nav__link site-nav__link--icon" href="/account">
+                      {% include 'user-icon' %}
+                    </a>            
+                  </li>
+                  {% endif %}
+                {% endif %}
+                {% endif %}
+                
+                <li class="site-nav__item site-nav__expanded-item site-nav__item--compressed">
+                  {% include 'iwish_v2' with 'iwishlink' %}
+                </li>
+
+                {% if section.settings.search == 'page' or section.settings.search == 'modal' %}
+                {% assign search_modal = true %}
+                {% if section.settings.search == 'page' %}
+                {% assign search_modal = false %}
+                {% endif %}
+                <li class="site-nav__item site-nav__item--compressed">
+                  <a href="/search" class="site-nav__link site-nav__link--icon{% if search_modal %} js-toggle-search-modal{% endif %}" data-mfp-src="#SearchModal">
+                    {% include 'search-icon' %}
+                  </a>
+                </li>
+                {% endif %}
+
+                <li class="site-nav__item site-nav__item--compressed">
+                  <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-button-rightx" aria-controls="CartDrawerx">
+                    {% include 'cart-icon' %}
+                    <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                  </a>
+                </li>
+                {% comment %}
+                <li id="icon-burger" class="site-nav__item site-nav__link--compressed site-nav__link js-drawer-open-button-left" aria-controls="NavDrawer">
+                  <img src="{{'icon-burger.png' | asset_url}}" alt="icon-burger"/>
+                </li>
+                {% endcomment %}
+              </ul>
+              
+            </div>
+            <div class="grid__item large--hide one-quarter">
+              <div class="site-nav--mobile text-right">
+                <a href="/cart" class="site-nav__link cart-link js-drawer-open-button-rightx" aria-controls="CartDrawer">
+                  <span class="icon-fallback-text">
+                    <span class="icon icon-cart" aria-hidden="true"></span>
+                    <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
+                  </span>
+                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu_link_list",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo-inverted",
+        "label": "Home page logo",
+        "info": "Shown on slideshow"
+      },
+      {
+        "type": "text",
+        "id": "logo_max_width",
+        "label": "Custom logo width (in pixels)",
+        "default": "180"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_noindex",
+        "label": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_noindex-inverted",
+        "label": "Home page logo",
+        "info": "Shown on slideshow"
+      },
+      {
+        "type": "text",
+        "id": "logo_noindex_max_width",
+        "label": "Custom logo width (in pixels)",
+        "default": "180"
+      },
+      {
+        "type": "select",
+        "id": "search",
+        "options": [
+           { "value": "modal",
+             "label": "Modal"
+           },
+           { "value": "page",
+             "label": "Page"
+           },
+           { "value": "none",
+             "label": "None"
+           }
+        ],
+        "label": "Search type"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_page_only",
+        "label": "Home page only",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Bar",
+        "default": "#1c1d1d"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#fff"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,31 @@
+<!-- /templates/page.liquid -->
+<style>
+  #shopify-section-Press {display: -webkit-box;display: -moz-box;display: -ms-flexbox;display:-webkit-flex;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;}
+  #shopify-section-Press article {margin-bottom: 30px;padding-left: 30px;}
+  .article__featured-image-wrapper {height: 180px;overflow: hidden;}
+  .article__featured-image-wrapper img {width: 100%;}
+  #shopify-section-Press article h2 {line-height: 1;}
+  .article__heading-link {font-size: 14px;}
+  .blog__meta.post-info {margin-bottom: 0;}
+  .pages-press hr {margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;width: 100%;}
+</style>
+<div class="grid">
+  <div class="">
+
+    <header class="section-header text-center">
+      <h1>{{ page.title }}</h1>
+    </header>
+
+    <div class="grid-uniform">
+
+      <div class="row">
+
+        {% section 'Press' %}
+
+      </div>
+
+
+    </div>
+
+  </div>
+</div>

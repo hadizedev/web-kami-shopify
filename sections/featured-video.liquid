@@ -1,0 +1,133 @@
+<style>
+  .feature-video {
+    padding: 40px 0;
+    background: #f6f6f6;
+  }
+  .feature-video .feature-row__item {
+    margin: auto;
+  }
+  @media (max-width: 768px){
+    .feature-row__text {text-align: center;padding: 35px 20px;}
+  }
+</style>
+<div class="wrapperx">
+  {% if section.settings.heading != blank %}
+  <div class="section-header text-center">
+    <h2 class="h1 section-header__title">{{ section.settings.heading | escape }}</h2>
+    <hr class="hr--small">
+  </div>
+  {% endif %}
+  <div class="page-width feature-row">
+    {% capture image_layout %}
+      <div class="feature-row__item">
+        <div class="video-wrapper">
+          {% if section.settings.video_url == blank %}
+          <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {% else %}
+          {% if section.settings.video_url.type == "youtube" %}
+          <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {% endif %}
+          {% if section.settings.video_url.type == "vimeo" %}
+          <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?color={{ settings.color_secondary | remove: "#" }}&byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+          {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    {% endcapture %}
+    <div class="feature-row feature-video">
+      {% if section.settings.layout == 'left' %}
+        {{ image_layout }}
+      {% endif %}
+      
+      {% if section.settings.layout == 'center' %}
+        {{ image_layout }}
+      {% endif %}
+
+      <div class="{% if section.settings.layout == 'center' %}hide {% endif %}feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }}">
+        {% if section.settings.title != blank %}
+          <h2 class="h1">{{ section.settings.title | escape }}</h2>
+        {% endif %}
+        {% if section.settings.text != blank %}
+          <div class="rte-setting featured-row__subtext">{{ section.settings.text }}</div>
+        {% endif %}
+        {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+          <a href="{{ section.settings.button_link }}" class="btn">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+
+      {% if section.settings.layout == 'right' %}
+        {{ image_layout }}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Video",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Video"
+      },
+      {
+        "type": "video_url",
+        "id": "video_url",
+        "label": "Video link",
+        "accept": ["youtube", "vimeo"]
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Image alignment",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Video",
+        "category": "Video"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,67 @@
+<!-- /templates/page.liquid -->
+<style>
+  .breadcrumb {
+    display: none;
+  }
+  .main-content .wrapper {
+    max-width: 100%;
+    padding: 0;
+  }
+  .main-content .wrapper .grid__item {
+    padding: 0;
+  }
+  .collaborations ul {
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .collaborations ul li {
+    position: relative;
+    list-style: none;
+    width: 33.333%;
+    transition: all .4s ease-in-out;
+  }
+  .collaborations ul li.col-three {
+    width: 33.333%;
+  }
+  .collaborations ul li.col-four {
+    width: 25%;
+  }
+  .collaborations ul li.col-five {
+    width: 20%;
+  }
+  @media (max-width: 480px){
+    .template-noindex .main-content {
+      padding-top: 15px;
+    }
+    .section-header.text-center h1 {
+      font-size: 24px;
+    }
+    .collaborations ul li {
+      width: 50%!important;
+    }
+    #steal-the-deal .collaborations ul li {
+      width: 25%!important;
+    }
+  }
+</style>
+<div class="gridx">
+  <div class="grid__item">
+
+    {% unless page.handle == 'about' %}
+    <header class="section-header text-center">
+      <h1>{{ page.title }}</h1>
+    </header>
+    {% endunless %}
+
+    <div class="rte rte--nomargin rte--indented-images">
+      {% section 'coll-page-catalogue' %}
+    </div>
+
+  </div>
+</div>

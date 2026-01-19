@@ -1,0 +1,52 @@
+{% if section.settings.show_getfree %}
+<style>
+  .cart__row.get-freeong {
+    border: none;
+    margin: 0;
+    padding-top: 0;
+  }
+  .cart__row.get-freeong p span {
+    color: red;
+  }
+</style>
+<div class="cart__row get-freeong">
+  {% assign val = section.settings.min_order | times: 100 %}
+  {% if cart.total_price <= val %}
+  <p>{{section.settings.before_free}}, kurang <span>{{ val | minus: cart.total_price | money }}</span> lagi.</p>
+  {% else %}
+  <p>{{section.settings.after_free}}</p>
+  {% endif %}
+</div>
+{% endif %}
+{% schema %}
+  {
+    "name": "Get Free Shipping",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_getfree",
+        "label": "Show Free Shipping",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "min_order",
+        "label": "Min Order",
+        "default": "1000000",
+        "info": "Tanpa titik koma"
+      },
+      {
+        "type": "textarea",
+        "id": "before_free",
+        "label": "Text before free shipping",
+        "default": "Gratis ongkos kirim dengan minimum pembelian Rp 1.000.000"
+      },
+      {
+        "type": "textarea",
+        "id": "after_free",
+        "label": "Text after free shipping",
+        "default": "Pesanan Anda sudah mencapai minimum pembelian Rp 1.000.000"
+      }
+    ]
+  }
+{% endschema %}
