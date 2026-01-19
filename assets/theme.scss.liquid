@@ -2180,8 +2180,7 @@ $shareCountBg: $colorBody;
 ==============================================================================*/
 .hero--full-height {
   // Height is set by JS on slider init. vh is a nice default for modern browsers.
-  height: 100vh;
-  min-height: 550px;
+  height: auto!important;
 
   .slick-list,
   .slick-track {
@@ -2189,7 +2188,7 @@ $shareCountBg: $colorBody;
   }
 
   .hero__image {
-    height: 100%;
+    // height: 100%;
     width: 100%;
     object-fit: cover;
     // Used for the IE lazysizes object-fit polyfill

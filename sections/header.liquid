@@ -136,6 +136,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
   }
   
   /* Better icon spacing */
@@ -144,6 +145,60 @@
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+  }
+  
+  /* Account dropdown styling */
+  .ssw-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    padding: 8px 0;
+    margin-top: 8px;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .ssw-dropdown:hover .ssw-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .ssw-dropdown {
+    position: relative;
+  }
+  
+  .ssw-dropdown-menu li {
+    list-style: none;
+    margin: 0;
+  }
+  
+  .ssw-dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+    font-size: 14px;
+  }
+  
+  .ssw-dropdown-menu li a:hover {
+    background: #f5f5f5;
+    color: #000;
+  }
+  
+  .ssw-dropdown-menu .ssw-divider {
+    height: 1px;
+    background: #eee;
+    margin: 6px 0;
   }
   
   /* Full width dropdown for screens below 1200px */
