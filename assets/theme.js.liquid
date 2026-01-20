@@ -863,10 +863,20 @@ var ajaxCart = (function(module, $) {
   };
 
   var $currentAddToCart; // Store reference to current button being clicked
+  var isAddingToCart = false; // Flag to prevent multiple submissions
 
   formOverride = function() {
-    $formContainer.on('submit', function(evt) {
+    $formContainer.off('submit').on('submit', function(evt) {
       evt.preventDefault();
+      evt.stopImmediatePropagation();
+
+      // Prevent multiple submissions
+      if (isAddingToCart) {
+        console.log('Already adding to cart, ignoring duplicate submission');
+        return false;
+      }
+
+      isAddingToCart = true;
 
       // Find the submit button ONLY in the current form being submitted
       var $currentForm = $(evt.target);
@@ -888,6 +898,8 @@ var ajaxCart = (function(module, $) {
         itemAddedCallback,
         itemErrorCallback
       );
+
+      return false;
     });
   };
 
@@ -897,6 +909,11 @@ var ajaxCart = (function(module, $) {
     }
 
     ShopifyAPI.getCart(cartUpdateCallback);
+    
+    // Reset the flag after cart is updated
+    setTimeout(function() {
+      isAddingToCart = false;
+    }, 500);
   };
 
   itemErrorCallback = function(XMLHttpRequest) {
@@ -904,6 +921,9 @@ var ajaxCart = (function(module, $) {
     if ($currentAddToCart) {
       $currentAddToCart.removeClass('is-adding is-added btn--loading');
     }
+
+    // Reset the flag on error
+    isAddingToCart = false;
 
     if (data.message) {
       if (data.status === 422) {
